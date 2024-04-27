@@ -1,9 +1,9 @@
-import { GridStyleOptions } from '../style-options';
-import { Dimentations, UiBuildTreeNode } from '../ui-tree-node';
+import { GridStyleOptions } from "../types/style-options";
+import { Dimentations, UiBuildTreeNode } from "../types/ui-tree-node";
 
 export interface UiGridBuildTreeNode extends UiBuildTreeNode {
   id: string;
-  type: 'grid';
+  type: "grid";
   style: GridStyleOptions;
   dimentions: Dimentations;
   children: UiBuildTreeNode[];

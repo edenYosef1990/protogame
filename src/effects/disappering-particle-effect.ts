@@ -1,6 +1,6 @@
-import { fabric } from 'fabric';
-import { IntervalBetweenFramesMilisecs } from '../constants';
-import { normalizeVector, vectorAdd, vectorSub } from '../utils';
+import { fabric } from "fabric";
+import { IntervalBetweenFramesMilisecs } from "../constants";
+import { EffectNumberAnimationParameters } from "./gradient-effect";
 
 function calculateDeltaForNumberEffect(
   timeDurationInMilisec: number,
@@ -10,16 +10,6 @@ function calculateDeltaForNumberEffect(
     ? ((params.endValue - params.startValue) * IntervalBetweenFramesMilisecs) /
         timeDurationInMilisec
     : undefined;
-}
-
-export interface EffectNumberAnimationParameters {
-  startValue: number;
-  endValue: number;
-}
-
-export interface EffectColorAnimationParameters {
-  startColor: fabric.Color;
-  endColor: fabric.Color;
 }
 
 export class DisapperingParticalEffect {
@@ -38,8 +28,8 @@ export class DisapperingParticalEffect {
       radius: radius,
       left: center.x,
       top: center.y,
-      originX: 'center',
-      originY: 'center',
+      originX: "center",
+      originY: "center",
       fill: `rgb(${color.r},${color.g},${color.b})`,
 
       hasBorders: false,
@@ -58,7 +48,7 @@ export class DisapperingParticalEffect {
       const { r, g, b } = this.color;
       const transpency = this.currTime / this.timeDurationInMilisec;
       const color = `rgba(${r},${g},${b},${1 - transpency})`;
-      this.renderedObject.set('fill', color);
+      this.renderedObject.set("fill", color);
       this.currTime += IntervalBetweenFramesMilisecs;
     }
   }

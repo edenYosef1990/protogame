@@ -1,12 +1,12 @@
-import { fabric } from 'fabric';
-import { UiBuildTreeNode, UiTreeNode } from './ui-tree-node';
+import { fabric } from "fabric";
+import { UiBuildTreeNode, UiTreeNode } from "./ui-tree-node";
 import {
   getTargetOfMouse,
   updateClickedElementsInSubtree,
   updateHoveredElementsInSubtree,
-} from './detect-and-handle-ui-interaction';
-import { UiTextTreeNode } from './ui-text-tree-node';
-import { reloadChildrenForUiNode } from './reload-children-for-ui-node';
+} from "../detect-and-handle-ui-interaction";
+import { UiTextTreeNode } from "./ui-text-tree-node";
+import { reloadChildrenForUiNode } from "../reload-children-for-ui-node";
 
 export class EntityUiObjectProxy {
   constructor(private node: UiTreeNode) {}
@@ -27,7 +27,10 @@ export class EntityUiObjectProxy {
     return updateClickedElementsInSubtree(this.node, pos);
   }
 
-  private findElementInNodeRec(node: UiTreeNode, id: string): UiTreeNode | null {
+  private findElementInNodeRec(
+    node: UiTreeNode,
+    id: string
+  ): UiTreeNode | null {
     if (node.id === id) return node;
     for (const child of node.children) {
       const res = this.findElementInNodeRec(child, id);
@@ -40,7 +43,10 @@ export class EntityUiObjectProxy {
     return this.findElementInNodeRec(this.node, id);
   }
 
-  private findFatherOfElementInNode(node: UiTreeNode, id: string): { node: UiTreeNode; index: number } | null {
+  private findFatherOfElementInNode(
+    node: UiTreeNode,
+    id: string
+  ): { node: UiTreeNode; index: number } | null {
     if (node.children.length === 0) return null;
     let index = 0;
     for (const child of node.children) {
@@ -57,10 +63,18 @@ export class EntityUiObjectProxy {
     toAdd: fabric.Object[];
     toRemove: fabric.Object[];
   } {
-    let locationFromFather = this.findFatherOfElementInNode(this.node, targetId);
-    if (locationFromFather === null) throw new Error(`ui node by id ${targetId} not found`);
+    let locationFromFather = this.findFatherOfElementInNode(
+      this.node,
+      targetId
+    );
+    if (locationFromFather === null)
+      throw new Error(`ui node by id ${targetId} not found`);
     let toRemove = locationFromFather.node.getRenderedComponents();
-    locationFromFather.node.originalBuildNode?.children.splice(locationFromFather.index, 1, replaceWith);
+    locationFromFather.node.originalBuildNode?.children.splice(
+      locationFromFather.index,
+      1,
+      replaceWith
+    );
     reloadChildrenForUiNode(locationFromFather.node);
     return { toAdd: locationFromFather.node.getRenderedComponents(), toRemove };
   }
@@ -68,7 +82,8 @@ export class EntityUiObjectProxy {
   changeTextValueInUi(targetId: string, replaceWith: string) {
     let node = this.findElementInNodeRec(this.node, targetId);
     if (node === null) throw new Error(`ui node by id ${targetId} not found`);
-    if (node.type !== 'text') throw new Error(`ui node by id ${targetId} is not a text element`);
+    if (node.type !== "text")
+      throw new Error(`ui node by id ${targetId} is not a text element`);
     let textNode = node as UiTextTreeNode;
     textNode.text.set({ text: replaceWith });
   }

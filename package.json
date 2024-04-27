@@ -1,5 +1,5 @@
 {
-  "name": "protogame",
+  "name": "@eden_yosef/protogame",
   "version": "0.0.1",
   "description": "game development library",
   "main": "./dist/index.js",

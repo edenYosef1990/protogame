@@ -1,5 +1,5 @@
-import { SizeType } from '../ui-size';
-import { UiGridBuildTreeNode } from './ui-grid-build-tree-node';
+import { SizeType } from "../types/ui-size";
+import { UiGridBuildTreeNode } from "./ui-grid-build-tree-node";
 
 export function calculateGridRowsDimentions(node: UiGridBuildTreeNode) {
   const style = node.style;

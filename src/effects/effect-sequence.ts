@@ -1,15 +1,15 @@
-import { IntervalBetweenFramesMilisecs } from '../constants';
-import { Color } from '../ui/ui-tree-node';
+import { IntervalBetweenFramesMilisecs } from "../constants";
+import { Color } from "../ui/types/ui-tree-node";
 import {
   getVectorLength,
   normalizeVector,
   vectorAdd,
   vectorSub,
-} from '../utils';
-import { BloodDropParticalEffect } from './blood-particle-effect';
-import { DisapperingParticalEffect } from './disappering-particle-effect';
-import { IEffect } from './efffect';
-import { NewGradientEffect } from './gradient-effect';
+} from "../utils";
+import { BloodDropParticalEffect } from "./blood-particle-effect";
+import { DisapperingParticalEffect } from "./disappering-particle-effect";
+import { IEffect } from "./efffect";
+import { NewGradientEffect } from "./gradient-effect";
 
 export interface EffectSequenceProccess {
   executeAndTryGetEffects(): IEffect[] | null;

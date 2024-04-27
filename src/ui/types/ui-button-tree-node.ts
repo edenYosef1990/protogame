@@ -1,6 +1,13 @@
-import { IntervalBetweenFramesMilisecs } from '../constants';
-import { Color, Dimentations, State, UiBuildTreeNode, UiNodeType, UiTreeNode } from './ui-tree-node';
-import { fabric } from 'fabric';
+import { IntervalBetweenFramesMilisecs } from "../../constants";
+import {
+  Color,
+  Dimentations,
+  State,
+  UiBuildTreeNode,
+  UiNodeType,
+  UiTreeNode,
+} from "./ui-tree-node";
+import { fabric } from "fabric";
 
 export class UiButtonTreeNode implements UiTreeNode {
   text: fabric.Text;
@@ -56,7 +63,7 @@ export class UiButtonTreeNode implements UiTreeNode {
       height,
     };
     this.children = [];
-    this.type = 'button';
+    this.type = "button";
   }
 
   getRenderedComponents(): fabric.Object[] {
@@ -99,7 +106,10 @@ export class UiButtonTreeNode implements UiTreeNode {
       this.state = State.None;
       return true;
     }
-    if (this.state === State.PressedDown && this.timeLeftForClickDisplayMilisec <= 0) {
+    if (
+      this.state === State.PressedDown &&
+      this.timeLeftForClickDisplayMilisec <= 0
+    ) {
       //the dirt state just stopped happening
       this.rectangle.set({ fill: this.backgroundColor });
       this.state = State.None;

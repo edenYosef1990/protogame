@@ -1,7 +1,8 @@
+import { GameLoopScheduler } from "./scheduler";
 import { setUpCanvases } from "./set-up-canvases";
 import { fabric } from "fabric";
 
-export function setUpGame() {
+export function createGame(): GameLoopScheduler {
   setUpCanvases("app");
 
   let gameCanvas = new fabric.StaticCanvas("myCanvas", {
@@ -17,4 +18,5 @@ export function setUpGame() {
     hoverCursor: "default",
     moveCursor: "default",
   });
+  return new GameLoopScheduler(gameCanvas, uiCanvas);
 }

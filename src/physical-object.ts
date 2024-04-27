@@ -1,5 +1,4 @@
-import { EntityObjectProxy } from './entity-object-proxy';
-import { UnitEntityObjectProxy } from './test-game/definitions/unit-rendered-object';
+import { EntityObjectProxy } from "./entity-object-proxy";
 import {
   divVector,
   getVectorLength,
@@ -7,8 +6,8 @@ import {
   normalizeVector,
   vectorAdd,
   vectorSub,
-} from './utils';
-import { fabric } from 'fabric';
+} from "./utils";
+import { fabric } from "fabric";
 
 export interface PhysicalObject {
   position: { x: number; y: number };
@@ -44,18 +43,10 @@ function generateRenderedLine(
       strokeWidth: 5,
       fill: color,
       stroke: color,
-      originX: 'center',
-      originY: 'center',
+      originX: "center",
+      originY: "center",
     })
   );
-}
-
-function generateRenderedObject(
-  color: string,
-  position: { x: number; y: number },
-  radius: number | undefined = undefined
-): EntityObjectProxy {
-  return new UnitEntityObjectProxy(color, position, radius);
 }
 
 function generateEntityObject(
@@ -133,15 +124,3 @@ function stop(entityObject: PhysicalObject) {
   entityObject.velocity = { x: 0, y: 0 };
   entityObject.acceleration = { x: 0, y: 0 };
 }
-
-export {
-  clacSeperationForce,
-  generateEntityObject,
-  generateRenderedObject,
-  generateRenderedLine,
-  SetLocation,
-  stop,
-  keepMoveInVelocity,
-  getFuturePosition,
-  calculateTotalForceAndVelocity as calculateTotalForce,
-};

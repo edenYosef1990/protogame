@@ -1,7 +1,14 @@
-import { EntityObjectProxy } from '../entity-object-proxy';
-import { EntityUiObjectProxy } from './entity-ui-object-proxy';
-import { Color, Dimentations, State, UiBuildTreeNode, UiNodeType, UiTreeNode } from './ui-tree-node';
-import { fabric } from 'fabric';
+import { EntityObjectProxy } from "../../entity-object-proxy";
+import { EntityUiObjectProxy } from "./entity-ui-object-proxy";
+import {
+  Color,
+  Dimentations,
+  State,
+  UiBuildTreeNode,
+  UiNodeType,
+  UiTreeNode,
+} from "./ui-tree-node";
+import { fabric } from "fabric";
 
 export class UiProgressBarTreeNode implements UiTreeNode {
   readonly frameWidth = 5;
@@ -51,7 +58,7 @@ export class UiProgressBarTreeNode implements UiTreeNode {
     };
     this.setValue(this.currValue);
     this.children = [];
-    this.type = 'button';
+    this.type = "button";
   }
 
   getRenderedComponents(): fabric.Object[] {
@@ -108,7 +115,11 @@ export function setTopLeftInWorld(
 }
 
 export class ProgressBarEntityObjectProxy extends EntityObjectProxy {
-  constructor(public progressBar: fabric.Group, public fullProgressWidth: number, public maxValue: number) {
+  constructor(
+    public progressBar: fabric.Group,
+    public fullProgressWidth: number,
+    public maxValue: number
+  ) {
     super(progressBar);
   }
 

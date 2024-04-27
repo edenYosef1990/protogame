@@ -1,6 +1,9 @@
-import { Dimentations, State, UiTreeNode } from './ui-tree-node';
+import { Dimentations, State, UiTreeNode } from "./types/ui-tree-node";
 
-export function isPosInsideRect(mousePos: { x: number; y: number }, rectDims: Dimentations) {
+export function isPosInsideRect(
+  mousePos: { x: number; y: number },
+  rectDims: Dimentations
+) {
   return (
     rectDims.x < mousePos.x &&
     mousePos.x < rectDims.x + rectDims.width &&
@@ -35,7 +38,10 @@ export function tryResetToIdleStateInSubtree(node: UiTreeNode): boolean {
   return true;
 }
 
-export function getTargetOfMouse(node: UiTreeNode, mousePos: { x: number; y: number }): string | undefined {
+export function getTargetOfMouse(
+  node: UiTreeNode,
+  mousePos: { x: number; y: number }
+): string | undefined {
   if (!isPosInsideRect(mousePos, node.dimentions)) return undefined;
   if (node.children.length === 0) return node.id;
   for (const child of node.children) {
@@ -46,7 +52,10 @@ export function getTargetOfMouse(node: UiTreeNode, mousePos: { x: number; y: num
   return undefined;
 }
 
-export function updateHoveredElementsInSubtree(node: UiTreeNode, mousePos: { x: number; y: number }): boolean {
+export function updateHoveredElementsInSubtree(
+  node: UiTreeNode,
+  mousePos: { x: number; y: number }
+): boolean {
   if (!(node.originalBuildNode?.isCatchingInteraction ?? false)) return false;
   if (!isPosInsideRect(mousePos, node.dimentions)) return false;
   if (node.children.length === 0) {
@@ -65,7 +74,10 @@ export function updateHoveredElementsInSubtree(node: UiTreeNode, mousePos: { x: 
   return false;
 }
 
-export function updateClickedElementsInSubtree(node: UiTreeNode, mousePos: { x: number; y: number }): boolean {
+export function updateClickedElementsInSubtree(
+  node: UiTreeNode,
+  mousePos: { x: number; y: number }
+): boolean {
   if (!(node.originalBuildNode?.isCatchingInteraction ?? false)) return false;
   if (!isPosInsideRect(mousePos, node.dimentions)) return false;
   if (node.children.length === 0) {

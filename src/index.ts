@@ -1,9 +1,7 @@
-import { setUpCanvases } from "./set-up-canvases";
-
-export function add(a: number, b: number): number {
-  return a + b;
-}
-
-export { setUpCanvases };
-
-console.log(add(3, 5)); //output: 8
+export * from "./set-up-canvases";
+export * from "./types";
+export * from "./ui";
+export * from "./scheduler";
+export * from "./input-from-devices";
+export * from "./dependencies-management";
+export * from "./effects";

@@ -1,4 +1,4 @@
-import { UiGridBuildTreeNode } from './grid/ui-grid-build-tree-node';
+import { UiGridBuildTreeNode } from "../grid/ui-grid-build-tree-node";
 import {
   Color,
   Dimentations,
@@ -7,8 +7,8 @@ import {
   UiBuildTreeNode,
   UiNodeType,
   UiTreeNode,
-} from './ui-tree-node';
-import { fabric } from 'fabric';
+} from "./ui-tree-node";
+import { fabric } from "fabric";
 
 export class UiContainerTreeNode implements UiTreeNode {
   rectangle: fabric.Rect;
@@ -45,7 +45,7 @@ export class UiContainerTreeNode implements UiTreeNode {
       height,
     };
     this.children = children;
-    this.type = 'block';
+    this.type = "block";
   }
 
   getRenderedComponents(): fabric.Object[] {
