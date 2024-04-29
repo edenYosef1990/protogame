@@ -1,8 +1,8 @@
-import { DependenciesList } from 'src/app/dependencies-management/get-dependencies';
-import { ComponentMethods, QueryListResult } from '../component';
-import { tryGetComponentsForEntitiesLists } from './utils';
-import { EventMethods } from '../event';
-import { StateDefinition } from '../state';
+import { DependenciesList } from "../../dependencies-management/get-dependencies";
+import { ComponentMethods, QueryListResult } from "../component";
+import { tryGetComponentsForEntitiesLists } from "./utils";
+import { EventMethods } from "../event";
+import { StateDefinition } from "../state";
 
 export function createSystemWithQueries<
   T extends Record<

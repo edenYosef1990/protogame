@@ -1,16 +1,5 @@
 import { fabric } from "fabric";
 import { IntervalBetweenFramesMilisecs } from "../constants";
-import { EffectNumberAnimationParameters } from "./gradient-effect";
-
-function calculateDeltaForNumberEffect(
-  timeDurationInMilisec: number,
-  params: EffectNumberAnimationParameters | undefined
-) {
-  return params !== undefined
-    ? ((params.endValue - params.startValue) * IntervalBetweenFramesMilisecs) /
-        timeDurationInMilisec
-    : undefined;
-}
 
 export class DisapperingParticalEffect {
   renderedObject: fabric.Circle;

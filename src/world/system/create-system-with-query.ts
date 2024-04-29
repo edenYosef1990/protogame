@@ -1,6 +1,6 @@
-import { DependenciesList } from 'src/app/dependencies-management/get-dependencies';
-import { ComponentMethods, EntityQueryResultItem } from '../component';
-import { mapAndFilter, tryGetComponentsFromEntity } from './utils';
+import { DependenciesList } from "../../dependencies-management/get-dependencies";
+import { ComponentMethods, EntityQueryResultItem } from "../component";
+import { mapAndFilter, tryGetComponentsFromEntity } from "./utils";
 
 export function createSystemWithQuery<
   T extends Record<string, ComponentMethods<any>>
