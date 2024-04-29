@@ -1,6 +1,6 @@
-import { fabric } from 'fabric';
-import { IntervalBetweenFramesMilisecs } from '../constants';
-import { IEffect } from './efffect';
+import { fabric } from "fabric";
+import { IntervalBetweenFramesMilisecs } from "../constants";
+import { IEffect } from "./efffect";
 
 function calculateDeltaForNumberEffect(
   timeDurationInMilisec: number,
@@ -28,15 +28,9 @@ export class NewGradientEffect implements IEffect {
   currTime: number = 0;
 
   r1Current: number;
-  r1Delta = calculateDeltaForNumberEffect(
-    this.timeDurationInMilisec,
-    this.animationParameters.r1Animation
-  );
+  r1Delta: number | undefined;
   stepCurrent: number;
-  stepDelta = calculateDeltaForNumberEffect(
-    this.timeDurationInMilisec,
-    this.animationParameters.stepAnimation
-  );
+  stepDelta: number | undefined;
 
   isDone = false;
 
@@ -55,10 +49,10 @@ export class NewGradientEffect implements IEffect {
       radius: radius,
       left: center.x,
       top: center.y,
-      originX: 'center',
-      originY: 'center',
+      originX: "center",
+      originY: "center",
       fill: new fabric.Gradient({
-        type: 'radial',
+        type: "radial",
         coords: {
           x1: this.radius,
           y1: this.radius,
@@ -70,12 +64,20 @@ export class NewGradientEffect implements IEffect {
         },
         colorStops: [
           { offset: 0, color: color }, // first color stop
-          { offset: 1, color: 'grey' }, // second color stop
+          { offset: 1, color: "grey" }, // second color stop
         ],
       }),
     });
     this.r1Current = animationParameters.r1Animation?.startValue ?? 0;
     this.stepCurrent = animationParameters.r1Animation?.startValue ?? 0;
+    this.stepDelta = calculateDeltaForNumberEffect(
+      this.timeDurationInMilisec,
+      this.animationParameters.stepAnimation
+    );
+    this.r1Delta = calculateDeltaForNumberEffect(
+      this.timeDurationInMilisec,
+      this.animationParameters.r1Animation
+    );
   }
 
   update() {
@@ -99,7 +101,7 @@ export class NewGradientEffect implements IEffect {
       }
     }
     let gradient = new fabric.Gradient({
-      type: 'radial',
+      type: "radial",
       coords: {
         x1: this.radius,
         y1: this.radius,
@@ -110,12 +112,12 @@ export class NewGradientEffect implements IEffect {
         r2: this.radius, // outer circle radius
       },
       colorStops: [
-        { offset: 0, color: 'rgba(173,255,47,0)' }, // second color stop
+        { offset: 0, color: "rgba(173,255,47,0)" }, // second color stop
         { offset: this.stepCurrent, color: this.color }, // first color stop
-        { offset: 1, color: 'rgba(173,255,47,0)' }, // second color stop
+        { offset: 1, color: "rgba(173,255,47,0)" }, // second color stop
       ],
     });
-    this.renderedObject.set('fill', gradient);
+    this.renderedObject.set("fill", gradient);
     if (this.currTime >= this.timeDurationInMilisec) {
       this.isDone = true;
     } else {
