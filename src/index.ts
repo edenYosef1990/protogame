@@ -6,3 +6,4 @@ export * from "./input-from-devices";
 export * from "./dependencies-management";
 export * from "./effects";
 export * from "./world";
+export * from "./physical-object";
