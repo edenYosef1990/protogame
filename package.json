@@ -1,6 +1,6 @@
 {
   "name": "@edyo/protogame",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "game development library",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
