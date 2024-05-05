@@ -1,11 +1,10 @@
-import { DependenciesList } from '../dependencies-management/get-dependencies';
+import { DependenciesList } from "../dependencies-management/get-dependencies";
 import {
-  SystemDescriptor,
   SystemModule,
   SystemModuleTargetType,
   SystemRunCritiria,
   SystemRunCritiriaBuilder,
-} from './types';
+} from "./types";
 
 export class SystemsModuleBuilder {
   private _rootModule: SystemModule = {

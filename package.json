@@ -7,6 +7,10 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsup",
+    "install-examples": "cd examples && npm install",
+    "build-examples": "cd examples && npm run build",
+    "start-examples": "cd examples && npm run dev",
+    "build-start-examples": "cd examples && npm run build && npm run dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

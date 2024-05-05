@@ -1,10 +1,5 @@
 import { DependenciesList } from "../../dependencies-management/get-dependencies";
-import { EcsManager } from "../ecs-manager";
 
-export function createSystem<QueryResult>(
-  queryFromWorld: (worldManager: EcsManager) => QueryResult,
-  system: (dependencies: DependenciesList, queryResults: QueryResult) => void
-) {
-  return (dependencies: DependenciesList) =>
-    system(dependencies, queryFromWorld(dependencies.worldsManager));
+export function createSystem(system: (dependencies: DependenciesList) => void) {
+  return (dependencies: DependenciesList) => system(dependencies);
 }

@@ -1,10 +1,9 @@
 import {
   EffectSequenceProccess,
-  ExplosionEffectCommand,
   ShotTrailEffectCommand,
   generateBigExplostionEffectCommand,
-} from './effect-sequence';
-import { EffectsManager } from './effects-manager';
+} from "./effect-sequence";
+import { EffectsManager } from "./effects-manager";
 
 export class EffectsSequencesManager {
   private ongoingProcess: EffectSequenceProccess[] = [];

@@ -1,7 +1,6 @@
 import { EntityObjectProxy } from "./entity-object-proxy";
 import { EntityUiObjectProxy } from "./ui/types/entity-ui-object-proxy";
 import { GetComponentQueryBaseMethods } from "./world/component";
-import { getResourceQueryBaseMethods } from "./world/resources";
 
 export type labelType = {};
 export interface Transform {

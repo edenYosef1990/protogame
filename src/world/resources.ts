@@ -15,26 +15,33 @@ export class ResourcesContainer {
         events: new Map(),
       });
     }
-    this.IdResourcesMapping.get(resourceTypeIdentifier)?.events.set(resourceTypeIdentifier, event);
+    this.IdResourcesMapping.get(resourceTypeIdentifier)?.events.set(
+      resourceTypeIdentifier,
+      event
+    );
     return resourceTypeIdentifier;
   }
   removeResource(resourceDefintion: ResourceMethods<any>) {
     this.IdResourcesMapping.delete(resourceDefintion.resourceIdentifier());
   }
-  getResourceFromContainer<T>(resourceDefintion: ResourceMethods<T>): T | undefined {
-    return this.IdResourcesMapping.get(resourceDefintion.resourceIdentifier()) as T;
+  getResourceFromContainer<T>(
+    resourceDefintion: ResourceMethods<T>
+  ): T | undefined {
+    return this.IdResourcesMapping.get(
+      resourceDefintion.resourceIdentifier()
+    ) as T;
   }
 }
 
-export interface ResourceMethods<T> {
-  type: 'resources';
+export interface ResourceMethods<_T> {
+  type: "resources";
   resourceIdentifier: () => number;
 }
 
 export function getResourceQueryBaseMethods<T>(): ResourceMethods<T> {
   const queueId = resourceUniqueIdGenerator.getUniqueId();
   return {
-    type: 'resources',
+    type: "resources",
     resourceIdentifier: () => {
       return queueId;
     },

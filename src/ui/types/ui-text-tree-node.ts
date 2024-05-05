@@ -1,12 +1,11 @@
 import {
-  Color,
   Dimentations,
   State,
   UiBuildTreeNode,
   UiNodeType,
   UiTreeNode,
-} from './ui-tree-node';
-import { fabric } from 'fabric';
+} from "./ui-tree-node";
+import { fabric } from "fabric";
 
 export class UiTextTreeNode implements UiTreeNode {
   text: fabric.Text;
@@ -30,7 +29,7 @@ export class UiTextTreeNode implements UiTreeNode {
       height: dimentions.height,
     });
     this.children = [];
-    this.type = 'text';
+    this.type = "text";
   }
 
   getRenderedComponents(): fabric.Object[] {

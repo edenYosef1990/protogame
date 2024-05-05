@@ -2,7 +2,6 @@ import { fabric } from "fabric";
 import { Entity, LifecycleStatus } from "./entity";
 import { ComponentMethods, EntityQueryResultItem } from "./component";
 import {
-  Transform,
   renderedProxyDef,
   renderedUiProxyDef,
 } from "../built-in-ecs-components";
@@ -10,11 +9,7 @@ import { EntityObjectProxy } from "../entity-object-proxy";
 import { EventContainer } from "./event";
 import { EntityUiObjectProxy } from "../ui/types/entity-ui-object-proxy";
 import { StateDefinition } from "./state";
-import {
-  UiBuildTreeNode,
-  UiNodeType,
-  UiTreeNode,
-} from "../ui/types/ui-tree-node";
+import { UiBuildTreeNode, UiTreeNode } from "../ui/types/ui-tree-node";
 import { ResourceMethods, ResourcesContainer } from "./resources";
 
 const uniqueIdGenerator = {
@@ -24,83 +19,6 @@ const uniqueIdGenerator = {
     return this.id;
   },
 };
-
-export interface ITransformMappingManager {
-  removeNode(father: number): void;
-  addNode(nodeId: string, transform: Transform): void;
-  isChildOfSomeone(id: number): boolean;
-  upsertRelativeTransform(id: number, newTransform: Transform): void;
-  clearChanges(): void;
-  getChanges(): { id: number; newTransform: Transform }[];
-}
-
-export class TransformersManager implements ITransformMappingManager {
-  fatherChildrenMapping: Map<number, number[]> = new Map();
-  childrenFatherMapping: Map<number, number> = new Map();
-  idTransformMapping: Map<number, Transform> = new Map();
-  idAbosulteTransformMapping: Map<number, Transform> = new Map();
-  idAbosulteTransformMappingChanged: Map<number, Transform> = new Map();
-
-  addNode(nodeId: string, transform: Transform, father?: number): void {
-    // const nodeTransform = this.idAbosulteTransformMapping.get(father) ?? {
-    //   top: 0,
-    //   left: 0,
-    // };
-    this.idAbosulteTransformMapping;
-  }
-
-  removeNode(nodeId: number): void {
-    const children = this.fatherChildrenMapping.get(nodeId) ?? [];
-    this.fatherChildrenMapping.delete(nodeId);
-    this.childrenFatherMapping.delete(nodeId);
-    for (let child of children) {
-      this.removeNode(child);
-    }
-  }
-
-  getChanges(): { id: number; newTransform: Transform }[] {
-    return [...this.idAbosulteTransformMappingChanged.keys()].map((x) => {
-      const value = this.idAbosulteTransformMappingChanged.get(x)!;
-      return { id: x, newTransform: value };
-    });
-  }
-
-  isChildOfSomeone(id: number): boolean {
-    return this.childrenFatherMapping.get(id) !== undefined;
-  }
-
-  private spreadChangeInSubtree(id: number) {
-    const nodeTransform = this.idAbosulteTransformMapping.get(id) ?? {
-      top: 0,
-      left: 0,
-    };
-    const children = this.fatherChildrenMapping.get(id) ?? [];
-    for (const child of children) {
-      const childTransform = this.idTransformMapping.get(child)!;
-      const abosulteTransform: Transform = {
-        top: nodeTransform.top + childTransform.top,
-        left: nodeTransform.left + childTransform.left,
-      };
-      this.idAbosulteTransformMapping.set(child, abosulteTransform);
-      this.idAbosulteTransformMappingChanged.set(child, abosulteTransform);
-      this.spreadChangeInSubtree(child);
-    }
-  }
-
-  clearChanges() {
-    this.idAbosulteTransformMappingChanged.clear();
-  }
-
-  upsertRelativeTransform(id: number, newTransform: Transform) {
-    this.idTransformMapping.set(id, newTransform);
-    const father = this.childrenFatherMapping.get(id);
-    if (father) {
-      this.spreadChangeInSubtree(father);
-    } else {
-      this.spreadChangeInSubtree(id);
-    }
-  }
-}
 
 export interface StateDetail {
   currentState: number;
@@ -183,7 +101,7 @@ export class EcsManager {
     }
   }
 
-  deleteState<T>(stateIdentifier: number) {
+  deleteState(stateIdentifier: number) {
     return this.statesContainer.delete(stateIdentifier);
   }
 

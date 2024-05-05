@@ -1,10 +1,10 @@
-import { Entity, LifecycleStatus } from './entity';
-import { EventMethods } from './event';
-import { ResourceMethods } from './resources';
-import { StateDefinition } from './state';
+import { Entity, LifecycleStatus } from "./entity";
+import { EventMethods } from "./event";
+import { ResourceMethods } from "./resources";
+import { StateDefinition } from "./state";
 
 export interface ComponentMethods<T> {
-  type: 'entities';
+  type: "entities";
   addComponentToEntity: (entity: Entity, component: T) => void;
   IsComponentInEntity: (entity: Entity) => boolean;
   getComponentFromEntity: (entity: Entity) => T;
@@ -19,7 +19,7 @@ export function GetComponentQueryBaseMethods<T>(
   identifier: string
 ): ComponentMethods<T> {
   return {
-    type: 'entities',
+    type: "entities",
     addComponentToEntity: (entity: Entity, component: T) => {
       entity.components[identifier] = component;
     },
@@ -83,36 +83,3 @@ export type QueryListResult<
     ? StateQueryResultItem<T[Property]>
     : ResourceQueryResultItem;
 };
-
-type Type = {
-  b: {
-    a: ComponentMethods<{ stam: string }>;
-    b: ComponentMethods<{ helloThere: number }>;
-  };
-  a: EventMethods<{ a: number; b: string }>;
-};
-
-type newType = QueryListResult<Type>;
-
-// type TypeName<T> = T extends string
-//     ? "string"
-//     : T extends number
-//     ? "number"
-//     : T extends boolean
-//     ? "boolean"
-//     : T extends undefined
-//     ? "undefined"
-//     : "object"
-
-// const exampleString: TypeName<"oscar"> = "string"
-// const exampleNumber: TypeName<5> = "number"
-// const exampleBoolean: TypeName<true> = "boolean"
-// const exampleUndefined: TypeName<undefined> = "undefined"
-
-// interface ExampleInterface {
-//     name: string
-//     age: number
-// }
-
-// const exampleObject: TypeName<ExampleInterface> = "object"
-// In this example, TypeName is a conditional type that accepts T as a generic type. We check if T extends (or is a subtype of) any of the…

@@ -1,6 +1,6 @@
 import { DependenciesList } from "../../dependencies-management/get-dependencies";
 import { ComponentMethods, QueryListResult } from "../component";
-import { tryGetComponentsForEntitiesLists } from "./utils";
+import { tryGetComponentsForEntitiesLists as queryEntitiesWithComponents } from "./utils";
 import { EventMethods } from "../event";
 import { StateDefinition } from "../state";
 
@@ -21,6 +21,6 @@ export function createSystemWithQueries<
   return (dependencies: DependenciesList) =>
     system(
       dependencies,
-      tryGetComponentsForEntitiesLists(dependencies.worldsManager, queriesList)
+      queryEntitiesWithComponents(dependencies.worldsManager, queriesList)
     );
 }

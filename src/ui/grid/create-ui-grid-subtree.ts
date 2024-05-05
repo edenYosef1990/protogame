@@ -1,10 +1,4 @@
-import { createUiSubtree } from "../create-ui-tree";
-import { UiContainerTreeNode } from "../types/ui-container-tree-node";
-import { UiBuildTreeNode, UiTreeNode } from "../types/ui-tree-node";
-import {
-  calculateGridColumnsDimentions,
-  calculateGridRowsDimentions,
-} from "./calculate-grid-dimensions";
+import { UiBuildTreeNode } from "../types/ui-tree-node";
 import { markAndGetRectangleForId } from "./mark-and-get-rectangle-for-id";
 import { UiGridBuildTreeNode } from "./ui-grid-build-tree-node";
 
