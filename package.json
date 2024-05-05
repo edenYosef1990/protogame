@@ -13,7 +13,7 @@
     "gamedev"
   ],
   "files": [
-    "./dist/*"
+    "dist/*"
   ],
   "author": "EdenYosef",
   "license": "ISC",
