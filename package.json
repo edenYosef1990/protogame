@@ -1,6 +1,6 @@
 {
-  "name": "@ey/protogame",
-  "version": "0.0.1",
+  "name": "@edyo/protogame",
+  "version": "0.0.4",
   "description": "game development library",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -11,6 +11,9 @@
   },
   "keywords": [
     "gamedev"
+  ],
+  "files": [
+    "./dist/*"
   ],
   "author": "EdenYosef",
   "license": "ISC",
