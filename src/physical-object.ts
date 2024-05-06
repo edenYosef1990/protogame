@@ -1,3 +1,4 @@
+import { UnitEntityObjectProxy } from "./basic-shapes";
 import { EntityObjectProxy } from "./entity-object-proxy";
 import {
   divVector,
