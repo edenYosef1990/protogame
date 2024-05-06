@@ -7,3 +7,4 @@ export * from "./dependencies-management";
 export * from "./effects";
 export * from "./world";
 export * from "./physical-object";
+export * from "./basic-shapes";

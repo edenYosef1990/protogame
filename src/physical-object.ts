@@ -32,7 +32,15 @@ function SetLocation(
   });
 }
 
-function generateRenderedLine(
+function generateRenderedObject(
+  color: string,
+  position: { x: number; y: number },
+  radius: number | undefined = undefined
+): EntityObjectProxy {
+  return new UnitEntityObjectProxy(color, position, radius);
+}
+
+export function generateRenderedLine(
   color: string,
   p: { x: number; y: number }
 ): EntityObjectProxy {
@@ -49,7 +57,7 @@ function generateRenderedLine(
   );
 }
 
-function generateEntityObject(
+export function generateEntityObject(
   position: { x: number; y: number },
   radius: number
 ): PhysicalObject {
