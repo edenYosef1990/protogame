@@ -4,7 +4,6 @@ import { vectorAdd, vectorSub } from "./utils";
 
 export class UnitEntityObjectProxy extends EntityObjectProxy {
   base: fabric.Circle;
-  canon: fabric.Line;
   centerPosRelative: { x: number; y: number };
   canonEdgePosition: { x: number; y: number };
 
@@ -26,24 +25,8 @@ export class UnitEntityObjectProxy extends EntityObjectProxy {
     });
     let center = { x: base.left!, y: base.top! };
 
-    let canon = new fabric.Line(
-      [position.x, position.y, position.x + 10, position.y],
-      {
-        // top: position.y,
-        // left: position.x,
-        strokeWidth: 5,
-        fill: Color.Yellow,
-        stroke: Color.LightGray,
-      }
-    );
-    super(
-      new fabric.Group([base, canon], {
-        originX: "center",
-        originY: "center",
-      })
-    );
+    super(base);
     this.base = base;
-    this.canon = canon;
     let groupBottomRight = super.getPosition();
     this.centerPosRelative = vectorSub(groupBottomRight, center); // relative to bottom right
     this.canonEdgePosition = vectorAdd(this.centerPosRelative, { x: 10, y: 0 });
