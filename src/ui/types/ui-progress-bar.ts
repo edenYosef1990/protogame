@@ -1,4 +1,4 @@
-import { EntityObjectProxy } from "../../entity-object-proxy";
+import { GraphicsComponent } from "../../entity-object-proxy";
 import { EntityUiObjectProxy } from "./entity-ui-object-proxy";
 import {
   Color,
@@ -97,11 +97,11 @@ export class UiProgressBarTreeNode implements UiTreeNode {
 }
 
 export function setTopLeftInWorld(
-  proxyObject: EntityObjectProxy,
+  proxyObject: GraphicsComponent,
   topLeft: { x: number; y: number },
   frameWidth: number
 ) {
-  let group = proxyObject.getRenderedObject() as fabric.Group;
+  let group = proxyObject.getGraphics() as fabric.Group;
   {
     group.item(0).set({
       top: topLeft.y,
@@ -114,7 +114,7 @@ export function setTopLeftInWorld(
   }
 }
 
-export class ProgressBarEntityObjectProxy extends EntityObjectProxy {
+export class ProgressBarEntityObjectProxy extends GraphicsComponent {
   constructor(
     public progressBar: fabric.Group,
     public fullProgressWidth: number,

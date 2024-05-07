@@ -1,14 +1,14 @@
-import { fabric } from 'fabric';
+import { fabric } from "fabric";
 
-export class EntityObjectProxy {
-  constructor(private renderedObject: fabric.Object) {}
+export class GraphicsComponent {
+  constructor(private graphics: fabric.Object) {}
 
-  getRenderedObject(): fabric.Object {
-    return this.renderedObject;
+  getGraphics(): fabric.Object {
+    return this.graphics;
   }
 
   setPosition(postion: { x: number; y: number }) {
-    this.renderedObject.set({
+    this.graphics.set({
       top: postion.y,
       left: postion.x,
     });
@@ -16,8 +16,8 @@ export class EntityObjectProxy {
 
   getPosition() {
     return {
-      y: this.renderedObject.top!,
-      x: this.renderedObject.left!,
+      y: this.graphics.top!,
+      x: this.graphics.left!,
     };
   }
 }

@@ -1,24 +1,32 @@
-import { renderedProxyDef } from "../../../src/built-in-ecs-components";
+import { graphicsDef } from "../../../src/built-in-ecs-components";
 import { DependenciesList } from "../../../src/dependencies-management/get-dependencies";
-import { gene } from "../../../src/physical-object";
+import { GraphicsComponent } from "../../../src/entity-object-proxy";
+import { generateCircle } from "../../../src/basic-shapes";
 import { SystemsModuleBuilder } from "../../../src/scheduler";
+import { createSystemWithQueries } from "../../../src/world/system/create-system-with-queries";
 
 export function genBoidPlayer(
   depedencies: DependenciesList,
   x: number,
-  y: number,
-  groupId: number
+  y: number
 ) {
   return depedencies.worldsManager.initEntity(
     {
-      physicalObjectDef,
-      renderComp: renderedProxyDef,
+      renderComp: graphicsDef,
     },
     {
-      physicalObjectDef: generatePhysicalObject({ x, y }, 10),
-      renderComp: generateRenderedObject("blue", { x, y }, 10),
+      renderComp: new GraphicsComponent(generateCircle("blue", { x, y }, 10)),
     }
   );
 }
 
-const gameModule = new SystemsModuleBuilder().addInitSystem().build();
+export const initEntitiesSystem = createSystemWithQueries(
+  {},
+  (depedencies, _query) => {
+    genBoidPlayer(depedencies, 100, 100);
+  }
+);
+
+export const gameModule = new SystemsModuleBuilder()
+  .addInitSystem(initEntitiesSystem)
+  .build();

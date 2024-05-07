@@ -1,11 +1,8 @@
 import { fabric } from "fabric";
 import { Entity, LifecycleStatus } from "./entity";
 import { ComponentMethods, EntityQueryResultItem } from "./component";
-import {
-  renderedProxyDef,
-  renderedUiProxyDef,
-} from "../built-in-ecs-components";
-import { EntityObjectProxy } from "../entity-object-proxy";
+import { graphicsDef, renderedUiProxyDef } from "../built-in-ecs-components";
+import { GraphicsComponent } from "../entity-object-proxy";
 import { EventContainer } from "./event";
 import { EntityUiObjectProxy } from "../ui/types/entity-ui-object-proxy";
 import { StateDefinition } from "./state";
@@ -175,10 +172,8 @@ export class EcsManager {
     };
     for (const key in entityInitDefinitions) {
       const comp = entityInitDefinitions[key];
-      if (comp.getIdentifier() === renderedProxyDef.getIdentifier()) {
-        this.addToCanvas(
-          (entityInit[key] as EntityObjectProxy).getRenderedObject()
-        );
+      if (comp.getIdentifier() === graphicsDef.getIdentifier()) {
+        this.addToCanvas((entityInit[key] as GraphicsComponent).getGraphics());
       }
       if (comp.getIdentifier() === renderedUiProxyDef.getIdentifier()) {
         this.addToUiCanvas(
@@ -199,12 +194,12 @@ export class EcsManager {
     let entityIndex = this.entities.findIndex((x) => x.id === entityId);
     let entity = this.entities[entityIndex];
 
-    let renderedComponent = entity.components[renderedProxyDef.getIdentifier()];
+    let renderedComponent = entity.components[graphicsDef.getIdentifier()];
     let renderedUiComponent =
       entity.components[renderedUiProxyDef.getIdentifier()];
     if (renderedComponent !== undefined) {
       this.removeFromCanvas(
-        (renderedComponent as EntityObjectProxy).getRenderedObject()
+        (renderedComponent as GraphicsComponent).getGraphics()
       );
     }
     if (renderedUiComponent !== undefined) {
@@ -226,10 +221,8 @@ export class EcsManager {
       { entityId, componentId: componentDefintion.getIdentifier() },
       "created"
     );
-    if (
-      componentDefintion.getIdentifier() === renderedProxyDef.getIdentifier()
-    ) {
-      this.addToCanvas((component as EntityObjectProxy).getRenderedObject());
+    if (componentDefintion.getIdentifier() === graphicsDef.getIdentifier()) {
+      this.addToCanvas((component as GraphicsComponent).getGraphics());
     } else if (
       componentDefintion.getIdentifier() === renderedUiProxyDef.getIdentifier()
     ) {
@@ -246,10 +239,8 @@ export class EcsManager {
     let entity = this.entities.find((x) => x.id === entityId);
     if (!entity) return;
     let component = entity.components[componentDefintion.getIdentifier()];
-    if (
-      componentDefintion.getIdentifier() === renderedProxyDef.getIdentifier()
-    ) {
-      this.addToCanvas((component as EntityObjectProxy).getRenderedObject());
+    if (componentDefintion.getIdentifier() === graphicsDef.getIdentifier()) {
+      this.addToCanvas((component as GraphicsComponent).getGraphics());
     }
     delete entity.components[componentDefintion.getIdentifier()];
   }

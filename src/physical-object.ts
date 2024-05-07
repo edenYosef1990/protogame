@@ -1,5 +1,4 @@
-import { UnitEntityObjectProxy } from "./basic-shapes";
-import { EntityObjectProxy } from "./entity-object-proxy";
+import { GraphicsComponent } from "./entity-object-proxy";
 import {
   divVector,
   getVectorLength,
@@ -23,29 +22,11 @@ export interface PhysicalObject {
   readonly proximityLimitForMovement: number;
 }
 
-function SetLocation(
-  renderedObject: fabric.Object,
-  position: { x: number; y: number }
-) {
-  renderedObject.set({
-    top: position.y,
-    left: position.x,
-  });
-}
-
-function generateRenderedObject(
-  color: string,
-  position: { x: number; y: number },
-  radius: number | undefined = undefined
-): EntityObjectProxy {
-  return new UnitEntityObjectProxy(color, position, radius);
-}
-
 export function generateRenderedLine(
   color: string,
   p: { x: number; y: number }
-): EntityObjectProxy {
-  return new EntityObjectProxy(
+): GraphicsComponent {
+  return new GraphicsComponent(
     new fabric.Line([p.x, p.y, p.x + 100, p.y + 100], {
       top: p.y,
       left: p.x,
