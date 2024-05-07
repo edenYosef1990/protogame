@@ -8,6 +8,7 @@
   "scripts": {
     "build": "tsup",
     "install-examples": "cd examples && npm install",
+    "install-all": "install && install-examples",
     "build-examples": "cd examples && npm run build",
     "start-examples": "cd examples && npm run dev",
     "build-start-examples": "cd examples && npm run build && npm run dev",
