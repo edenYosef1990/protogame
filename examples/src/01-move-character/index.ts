@@ -38,7 +38,34 @@ export const moveEntity = createSystemWithQueries(
   }
 );
 
+export const handleKeysForMainCharacter = createSystemWithQueries(
+  {
+    entities: {
+      graphics: graphicsDef,
+    },
+  },
+  (_deps, queryResults) => {
+    const snapshot =
+      _deps.devicesInputModule.inputFromDevicesCollector.calculateInputSnapshot();
+    let main = queryResults.entities[0];
+
+    const deltaLeft =
+      snapshot.keysState.get("ArrowLeft")?.isDown ?? false ? 2 : 0;
+    const deltaRight =
+      snapshot.keysState.get("ArrowRight")?.isDown ?? false ? 2 : 0;
+    const deltaUp = snapshot.keysState.get("ArrowUp")?.isDown ?? false ? 2 : 0;
+    const deltaDown =
+      snapshot.keysState.get("ArrowDown")?.isDown ?? false ? 2 : 0;
+
+    let { x, y } = main.graphics.getPosition();
+    main.graphics.setPosition({
+      x: x + deltaRight - deltaLeft,
+      y: y + deltaDown - deltaUp,
+    });
+  }
+);
+
 export const gameModule = new SystemsModuleBuilder()
   .addInitSystem(initEntitiesSystem)
-  .addSystem(moveEntity)
+  .addSystem(handleKeysForMainCharacter)
   .build();
