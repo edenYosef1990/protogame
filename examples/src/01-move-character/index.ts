@@ -1,10 +1,10 @@
-import { graphicsDef } from "../../../src/built-in-ecs-components";
-import { DependenciesList } from "../../../src/dependencies-management/get-dependencies";
-import { GraphicsComponent } from "../../../src/entity-object-proxy";
-import { generateCircle } from "../../../src/basic-shapes";
-import { SystemsModuleBuilder } from "../../../src/scheduler";
-import { createSystem } from "../../../src/world/system/create-system";
-import { createSystemWithQueries } from "../../../src/world/system/create-system-with-queries";
+import { graphicsDef } from "@protogame/built-in-ecs-components";
+import { DependenciesList } from "@protogame/dependencies-management/get-dependencies";
+import { GraphicsComponent } from "@protogame/entity-object-proxy";
+import { generateCircle } from "@protogame/basic-shapes";
+import { SystemsModuleBuilder } from "@protogame/scheduler";
+import { createSystem } from "@protogame/world/system/create-system";
+import { createSystemWithQueries } from "@protogame/world/system/create-system-with-queries";
 
 export function genBoidPlayer(
   depedencies: DependenciesList,
