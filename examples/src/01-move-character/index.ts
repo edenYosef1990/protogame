@@ -1,10 +1,10 @@
 import { graphicsDef } from "@protogame/built-in-ecs-components";
-import { DependenciesList } from "@protogame/dependencies-management/get-dependencies";
+import { DependenciesList } from "@protogame/dependencies-management";
 import { GraphicsComponent } from "@protogame/entity-object-proxy";
 import { generateCircle } from "@protogame/basic-shapes";
 import { SystemsModuleBuilder } from "@protogame/scheduler";
-import { createSystem } from "@protogame/world/system/create-system";
-import { createSystemWithQueries } from "@protogame/world/system/create-system-with-queries";
+import { createSystem } from "@protogame/world";
+import { createSystemWithQueries } from "@protogame/world";
 
 export function genBoidPlayer(
   depedencies: DependenciesList,
