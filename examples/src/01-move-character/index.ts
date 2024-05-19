@@ -25,19 +25,6 @@ export const initEntitiesSystem = createSystem((depedencies) => {
   genBoidPlayer(depedencies, 100, 100);
 });
 
-export const moveEntity = createSystemWithQueries(
-  {
-    entities: {
-      graphics: graphicsDef,
-    },
-  },
-  (_, queries) => {
-    let singleEntity = queries.entities[0];
-    let { x, y } = singleEntity.graphics.getPosition();
-    singleEntity.graphics.setPosition({ x, y: y + 1 });
-  }
-);
-
 export const handleKeysForMainCharacter = createSystemWithQueries(
   {
     entities: {
